@@ -45,7 +45,7 @@ def create_chain():
     """
     retriever = load_retriever()
     prompt = create_prompt()
-    llm = ChatOllama(model="llam3")
+    llm = ChatOllama(model="llama3")
 
     chain = (
         {"context": retriever, "question": RunnablePassthrough()}
