@@ -13,7 +13,7 @@ from langchain_ollama import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 
 DOCUMENTS_PATH = "documents"
-CRHOMA_PATH = "chroma_db"
+CHROMA_PATH = "chroma_db"
 
 def get_loader(file_path):
     """
@@ -68,3 +68,24 @@ def ingest_documents():
     print(f"Split into {len(chunks)} chunks")
 
     return chunks
+
+def store_in_chroma(chunks):
+    """
+    uses the embedding moel to convert document chunks into vectors
+    stores the resulting vectorstore in CHROMA_PATH using ChromaDB
+    """
+    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+
+    vectorstore = Chroma.from_documents(
+        documents=chunks,
+        embedding=embeddings,
+        persist_directory=CHROMA_PATH
+    )
+
+    print(f"Stored {len(chunks)} chunks in ChromaDB")
+    return vectorstore
+
+if __name__ == "__main__":
+    chunks = ingest_documents()
+    store_in_chroma(chunks)
+    print("Ingestion complete!")
