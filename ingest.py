@@ -16,7 +16,7 @@ DOCUMENTS_PATH = "documents"
 CRHOMA_PATH = "chroma_db"
 
 # returns correct loader based off file type
-# else returns None if file type is not supported
+# else, returns None if file type is not supported
 def get_loader(file_path):
     extension = os.path.splitext(file_path)[1].lower()
 
