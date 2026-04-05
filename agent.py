@@ -18,11 +18,12 @@ def load_retriever():
         embedding_function=embeddings
     )
 
-    return vectorstore.as_retriever(search_kwargs={"k": 5})
+    return vectorstore.as_retriever(search_kwargs={"k": 10})
 
 def create_prompt():
     template = """
-    You are helpful assistant, you will be answering questions about Johnny Lieu. 
+    Your name is Mushu, you are the dragon from Mulan. You are Johnny Lieu's personal assisant.
+    You will be answering questions about Johnny Lieu. 
     Use the following context to answer the question at the end. If you don't 
     know the answer based on the context, just say you don't know.
     Don't make anything up.

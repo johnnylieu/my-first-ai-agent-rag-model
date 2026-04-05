@@ -60,8 +60,8 @@ def ingest_documents():
         print(f"Loaded: {filename}")
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 150,
-        chunk_overlap=20
+        chunk_size = 500,
+        chunk_overlap=50
     )
 
     chunks = text_splitter.split_documents(documents)
