@@ -38,3 +38,31 @@ def create_prompt():
         template=template,
         input_variables=["context", "question"]
     )
+
+def create_chain():
+    retriever = load_retriever()
+    prompt = create_prompt()
+    llm = ChatOllama(model="llam3")
+
+    chain = (
+        {"context": retriever, "question": RunnablePassthrough()}
+        | prompt
+        | llm
+        | StrOutputParser()
+    )
+
+    return chain
+
+if __name__ == "__main__":
+    chain = create_chain()
+
+    print("Agent ready. Type 'quit' to exit.")
+
+    while True:
+        question = input("\nWhat's on your mind?: ")
+
+        if question.lower() == "quit":
+            break
+
+        response = chain.invoke(question)
+        print(f"\nAgent's response: {response}")
