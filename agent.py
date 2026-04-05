@@ -22,9 +22,10 @@ def load_retriever():
 
 def create_prompt():
     template = """
-    You are helpful assistant. Use the following context to answer
-    the question at the end. If you don't know the answer based on
-    the context, just say you don't know. Don't make anything up.
+    You are helpful assistant, you will be answering questions about Johnny Lieu. 
+    Use the following context to answer the question at the end. If you don't 
+    know the answer based on the context, just say you don't know.
+    Don't make anything up.
 
     context: {context}
 
@@ -39,6 +40,9 @@ def create_prompt():
     )
 
 def create_chain():
+    """
+    Wires load_retriever and create_prompt together into a pipeline
+    """
     retriever = load_retriever()
     prompt = create_prompt()
     llm = ChatOllama(model="llam3")
