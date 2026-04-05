@@ -66,6 +66,7 @@ if __name__ == "__main__":
         question = input("\nWhat's on your mind?: ")
 
         if question.lower() == "quit":
+            print("Good bye! Please keep in mind that I'm still learning. I recommend reading Mr. Lieu's resume.")
             break
 
         response = chain.invoke(question)
