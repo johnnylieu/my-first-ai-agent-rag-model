@@ -15,9 +15,12 @@ from langchain_community.vectorstores import Chroma
 DOCUMENTS_PATH = "documents"
 CRHOMA_PATH = "chroma_db"
 
-# returns correct loader based off file type
-# else, returns None if file type is not supported
 def get_loader(file_path):
+    """
+    returns correct loader based off file type
+    else, returns None if file type is not supported
+    """
+
     extension = os.path.splitext(file_path)[1].lower()
 
     loaders = {
@@ -37,3 +40,31 @@ def get_loader(file_path):
         return None
     
     return loader_class(file_path)
+
+def ingest_documents():
+    """
+    chunk overlap is used to preserve context across chunk boundaries
+    without it, a sentence that spans two chunks could lose its meaning when retreived in isolation
+    """
+    documents = []
+
+    for filename in os.listdir(DOCUMENTS_PATH):
+        file_path = os.path.join(DOCUMENTS_PATH, filename)
+        loader = get_loader(file_path)
+
+        if loader is None:
+            continue
+
+        loaded_docs = loader.load()
+        documents.extend(loaded_docs)
+        print(f"Loaded: {filename}")
+
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size = 150,
+        chunk_overlap=20
+    )
+
+    chunks = text_splitter.split_documents(documents)
+    print(f"Split into {len(chunks)} chunks")
+
+    return chunks
