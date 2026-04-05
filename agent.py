@@ -20,3 +20,21 @@ def load_retriever():
     )
 
     return vectorstore.as_retriever(search_kwargs={"k": 5})
+
+def create_prompt():
+    template = """
+    You are helpful assistant. Use the following context to answer
+    the question at the end. If you don't know the answer based on
+    the context, just say you don't know. Don't make anything up.
+
+    context: {context}
+
+    Question: {question}
+
+    Answer:
+    """
+
+    return PromptTemplate(
+        template=template,
+        input_variables=["context", "question"]
+    )
