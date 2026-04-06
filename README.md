@@ -9,9 +9,9 @@ to questions about my professional background.
 
 RAG = Retrieval Augmented Generation
 
-- Retrieval - find the relevant chunks from the vector database
-- Augmented - add those chunks to the context window (augment = enhance/add to)
-- Generate - generates an answer based on those chunks
+- **Retrieval** - find the relevant chunks from the vector database
+- **Augmented** - add those chunks to the context window (augment = enhance/add to)
+- **Generate** - generates an answer based on those chunks
 
 ## Tech Stack
 
@@ -24,7 +24,8 @@ RAG = Retrieval Augmented Generation
 
 ## Setup Instructions
 
-pip install -r requirements.txt
+1. create virtual environment
+2. execute "pip install -r requirements.txt"
 
 ## Usage
 
